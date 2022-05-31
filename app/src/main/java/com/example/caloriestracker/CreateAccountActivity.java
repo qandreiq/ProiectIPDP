@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class CreateAccountActivity extends AppCompatActivity {
@@ -56,31 +57,17 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
                 if (!(userNameInput.getText().toString().isEmpty() || passwordInput.getText().toString().isEmpty() || ageInput.getText().toString().isEmpty() || genderCheck == 0)) {
                     if (Integer.valueOf(ageInput.getText().toString()) > 16) {
-                        DataBaseHelper db = new DataBaseHelper(CreateAccountActivity.this);
-                        UserModel userModel;
 
                         Date c = Calendar.getInstance().getTime();
                         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
                         String formattedDate = currentDate.format(c);
 
+                        String username = userNameInput.getText().toString();
+                        String password = passwordInput.getText().toString();
+                        int age = Integer.parseInt(ageInput.getText().toString());
+                        String gender = genderInput.getSelectedItem().toString();
 
-                        try {
-                            userModel = new UserModel(-1, userNameInput.getText().toString(), passwordInput.getText().toString(),
-                                    Integer.parseInt(ageInput.getText().toString()), genderInput.getSelectedItem().toString(), 1, 1, 1, formattedDate, 1);
-                        } catch (Exception e) {
-                            Toast.makeText(CreateAccountActivity.this, "Error", Toast.LENGTH_SHORT).show();
-                            userModel = new UserModel(-1, "Error", "Error",
-                                    -1, "Error", -1, -1, -1, "Error", -1);
-                        }
-
-                        if (!db.existingValue(userNameInput.getText().toString())) {
-                            db.addOne(userModel);
-                            Toast.makeText(CreateAccountActivity.this, "Account Created", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(CreateAccountActivity.this, GoalCalculatorActivity.class);
-                            intent.putExtra("username", userNameInput.getText().toString());
-                            startActivity(intent);
-                        } else
-                            Toast.makeText(CreateAccountActivity.this, "UserName already exists", Toast.LENGTH_SHORT).show();
+                        createUser(username,password,age,gender,formattedDate);
 
                     } else
                         Toast.makeText(CreateAccountActivity.this, "You need to be at least 16yo to register!", Toast.LENGTH_SHORT).show();
@@ -90,6 +77,27 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void createUser(String userName, String password, int age,String gender, String date) {
+        UserDB db = UserDB.getDBInstance(this.getApplicationContext());
+        List<String> currentUserNames = db.userDAO().getAllExistingUserNames();
+        if (checkUniqueUserName(currentUserNames, userName.toUpperCase())) {
+            UserModel user = new UserModel(userName.toUpperCase(), password, age,gender.toUpperCase(),0,0,0,date,0);
+            db.userDAO().insertUser(user);
+            Toast.makeText(CreateAccountActivity.this, "Account created", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(CreateAccountActivity.this, GoalCalculatorActivity.class);
+            intent.putExtra("username",userName);
+            startActivity(intent);
+        } else
+            Toast.makeText(CreateAccountActivity.this, "UserName already exists", Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean checkUniqueUserName(List<String> userNamesList, String newUserName) {
+        for (String userName : userNamesList)
+            if (userName.equals(newUserName))
+                return false;
+        return true;
     }
 
 

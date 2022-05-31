@@ -1,20 +1,34 @@
 package com.example.caloriestracker;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class UserModel {
 
+    @ColumnInfo(name = "user_name")
     private String username;
+    @ColumnInfo(name = "password")
     private String password;
+    @ColumnInfo(name = "gender")
     private String gender;
+    @ColumnInfo(name = "age")
     private int age;
+    @PrimaryKey(autoGenerate = true)
     private int id;
+    @ColumnInfo(name = "goal")
     private int goal;
+    @ColumnInfo(name = "weight")
     private int weight;
+    @ColumnInfo(name = "height")
     private int height;
+    @ColumnInfo(name = "lastDate")
     private String lastDate;
+    @ColumnInfo(name = "caloricNeeds")
     private int caloricNeeds;
 
-    public UserModel(int id, String username, String password, int age, String gender, int goal, int height, int weight, String lastDate,int caloricNeeds) {
-        this.id = id;
+    public UserModel( String username, String password, int age, String gender, int goal, int height, int weight, String lastDate,int caloricNeeds) {
         this.username = username;
         this.password = password;
         this.gender = gender;
@@ -26,10 +40,6 @@ public class UserModel {
         this.caloricNeeds = caloricNeeds;
     }
 
-    public int getId() {
-        return id;
-    }
-
     public String getUsername() {
         return username;
     }
@@ -38,12 +48,16 @@ public class UserModel {
         return password;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
     public int getAge() {
         return age;
     }
 
-    public String getGender() {
-        return gender;
+    public int getId() {
+        return id;
     }
 
     public int getGoal() {
@@ -69,44 +83,5 @@ public class UserModel {
     public void setId(int id) {
         this.id = id;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public void setFirstTime(int firstTime) {
-        this.goal = firstTime;
-    }
-
-    public void setGoal(int goal) {
-        this.goal = goal;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public void setLastDate(String lastDate) {
-        this.lastDate = lastDate;
-    }
-
-    public void setCaloricNeeds(int caloricNeeds) {
-        this.caloricNeeds = caloricNeeds;
-    }
 }
+//ORM

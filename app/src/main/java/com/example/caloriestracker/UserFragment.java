@@ -28,16 +28,19 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
+
+
         View view = inflater.inflate(R.layout.fragment_user,container,false);
         return view;
     }
 
+
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        UserDB db = UserDB.getDBInstance(getActivity().getApplicationContext());
         view.setBackgroundColor(Color.rgb(32, 32, 32));
-        DataBaseHelper db = new DataBaseHelper(getActivity());
         Bundle data = getArguments();
 
         currentUser = "null";
@@ -51,18 +54,9 @@ public class UserFragment extends Fragment {
         changeUserNameButton = view.findViewById(R.id.changeUserNameButton2);
 
         userName.setText(currentUser);
-        age.setText(String.valueOf(db.getAge(currentUser)));
-        gender.setText(db.getGender(currentUser));
-        heightWeight.setText(String.valueOf(db.getHeight(currentUser))+"cm "+ String.valueOf(db.getWeight(currentUser)) + "kg");
-
-        changeUserNameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), CheckPassWordActivity.class);
-                intent.putExtra("username",data.getString("usernameFragment") );
-                startActivity(intent);
-            }
-        });
+        age.setText(String.valueOf(db.userDAO().getAge(currentUser)));
+        gender.setText(db.userDAO().getGender(currentUser));
+        heightWeight.setText(String.valueOf(db.userDAO().getHeight(currentUser))+"cm "+ String.valueOf(db.userDAO().getWeight(currentUser)) + "kg");
 
     }
 

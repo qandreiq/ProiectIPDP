@@ -52,7 +52,7 @@ public class DiaryFragment extends Fragment {
         SimpleDateFormat currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
         String formattedDate = currentDate.format(c);
 
-        DataBaseHelper db = new DataBaseHelper(getActivity());
+        UserDB db = UserDB.getDBInstance(getActivity().getApplicationContext());
         DataBaseEatenFood dbEF = new DataBaseEatenFood(getActivity());
 
         FoodModel apple = new FoodModel("apple", 50);
@@ -71,9 +71,9 @@ public class DiaryFragment extends Fragment {
         foodView = view.findViewById(R.id.foodView);
 
         if (dbEF.getEatenCalories(currentUser, formattedDate) > 0) {
-            calculatedCalories = db.getGoal(currentUser) - dbEF.getEatenCalories(currentUser, formattedDate);
+            calculatedCalories = db.userDAO().getGoal(currentUser) - dbEF.getEatenCalories(currentUser, formattedDate);
             showFood(dbEF.getEverything(currentUser, formattedDate));
-        } else calculatedCalories = db.getGoal(currentUser);
+        } else calculatedCalories = db.userDAO().getGoal(currentUser);
 
         setColor(calculatedCalories);
 
@@ -108,7 +108,7 @@ public class DiaryFragment extends Fragment {
                 } else
                     Toast.makeText(getActivity(), "Food unavailable/Incorrect data", Toast.LENGTH_SHORT).show();
 
-                recalculatedCalories = db.getGoal(currentUser) - dbEF.getEatenCalories(currentUser, formattedDate);
+                recalculatedCalories = db.userDAO().getGoal(currentUser) - dbEF.getEatenCalories(currentUser, formattedDate);
                 setColor(recalculatedCalories);
                 remainingCalories.setText(String.valueOf(recalculatedCalories));
                 showFood(dbEF.getEverything(currentUser,formattedDate));
@@ -130,7 +130,7 @@ public class DiaryFragment extends Fragment {
     private void showFood(List<FoodModel> list) {
         ArrayAdapter foodAdapter = new ArrayAdapter<FoodModel>(getActivity(), android.R.layout.simple_list_item_1, list);
         foodView.setAdapter(foodAdapter);
-
+//mvc
     }
 
 }

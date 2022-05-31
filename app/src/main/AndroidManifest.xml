@@ -10,12 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CaloriesTracker">
         <activity
-            android:name=".CheckPassWordActivity"
-            android:exported="false" />
-        <activity
-            android:name=".EditUserActivity"
-            android:exported="false" />
-        <activity
             android:name=".CreateAccountActivity"
             android:exported="false" />
         <activity

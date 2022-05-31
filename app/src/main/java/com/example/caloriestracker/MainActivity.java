@@ -2,6 +2,7 @@ package com.example.caloriestracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -54,19 +55,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                DataBaseHelper db = new DataBaseHelper(MainActivity.this);
-                String inputIdBox = idBox.getText().toString();
+                String inputIdBox = idBox.getText().toString().toUpperCase();
                 String inputPasswordBox = passwordBox.getText().toString();
 
                 if (inputIdBox.isEmpty() || inputPasswordBox.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please enter your correct credentials!", Toast.LENGTH_SHORT).show();
                 } else {
-                    if (!db.validateLogin(inputIdBox, inputPasswordBox)) {
+                    if (!checkCredentials(inputIdBox, inputPasswordBox)) {
                         Toast.makeText(MainActivity.this, "Please enter your correct credentials!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, HomePageActivity.class);
-                        intent.putExtra("username", inputIdBox);
+                        intent.putExtra("username", inputIdBox.toString().toUpperCase());
                         startActivity(intent);
                     }
                 }
@@ -85,5 +85,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Toast.makeText(MainActivity.this,"Back button disabled!",Toast.LENGTH_SHORT).show();
+    }
+    private boolean checkCredentials(String userName, String password) {
+        UserDB db = UserDB.getDBInstance(this.getApplicationContext());
+        String realPassword = db.userDAO().getPassword(userName);
+        if (realPassword != null)
+            if (realPassword.equals(password)) return true;
+        return false;
     }
 }

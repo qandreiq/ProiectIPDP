@@ -54,11 +54,15 @@ public class GoalCalculatorActivity extends AppCompatActivity {
 
         checkCalculated = false;
 
+        UserDB db = UserDB.getDBInstance(this.getApplicationContext());
+        Bundle extras = getIntent().getExtras();
+        String userNameFromBundle = extras.getString("username").toUpperCase();
         calculateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                DataBaseHelper db = new DataBaseHelper(GoalCalculatorActivity.this);
+
+
 
                 if (!(weightBox.getText().toString().isEmpty() || heightBox.getText().toString().isEmpty() || ageBox.getText().toString().isEmpty())) {
                     double weightInput = Double.valueOf(weightBox.getText().toString());
@@ -95,20 +99,20 @@ public class GoalCalculatorActivity extends AppCompatActivity {
 
                     if (!(activityLevel == 0 || goal == 0)) {
 
-                        Bundle extras = getIntent().getExtras();
-                        userGender = db.getGender(extras.getString("username"));
+                        //Bundle extras = getIntent().getExtras();
+                        userGender = db.userDAO().getGender(userNameFromBundle);
                         double AMR = calculateBMR(weightInput, heightInput, ageInput,userGender) * activityLevel;
-                        newGoalText.setText(extras.getString("username") + ", your new daily goal is");
+                        newGoalText.setText(userNameFromBundle + ", your new daily goal is");
                         dailyGoalText.setTextColor(Color.GREEN);
                         dailyGoalText.setTextSize(50);
                         dailyGoalText.setText("" + (int) Math.round(calculateCalories(AMR, goal)) + " kcal");
                         checkCalculated = true;
 
 
-                        db.setGoal(extras.getString("username"), (int) Math.round(calculateCalories(AMR, goal)));
-                        db.setHeight(extras.getString("username"),(int) heightInput);
-                        db.setWeight(extras.getString("username"),(int)weightInput);
-                        db.setCaloricNeeds(extras.getString("username"),(int) Math.round(calculateCalories(AMR, goal)));
+                        db.userDAO().setGoal((int) Math.round(calculateCalories(AMR, goal)),userNameFromBundle);
+                        db.userDAO().setHeight((int) heightInput, userNameFromBundle);
+                        db.userDAO().setWeight((int)weightInput,userNameFromBundle);
+                        db.userDAO().setNeeds((int) Math.round(calculateCalories(AMR, goal)),userNameFromBundle);
                     } else
                         Toast.makeText(GoalCalculatorActivity.this, "Please enter all the data", Toast.LENGTH_SHORT).show();
                 } else
@@ -122,6 +126,7 @@ public class GoalCalculatorActivity extends AppCompatActivity {
                 Bundle extras = getIntent().getExtras();
                 if (checkCalculated) {
                     Intent intent = new Intent(GoalCalculatorActivity.this, MainActivity.class);
+                    intent.putExtra("username", extras.getString("username"));
                     startActivity(intent);
                 } else
                     Toast.makeText(GoalCalculatorActivity.this, "Please calculate your caloric needs first", Toast.LENGTH_SHORT).show();
