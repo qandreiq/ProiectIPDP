@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Calories Tracker</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string-array name="activityItems">
+        <item>Choose activity level</item>
+        <item>Sedentary</item>
+        <item>Moderately Active</item>
+        <item>Extremely Active</item>
+    </string-array>
+
+    <string-array name="goalItems">
+        <item>Choose your goal</item>
+        <item>Lose weight</item>
+        <item>Maintain weight</item>
+        <item>Gain weight</item>
+    </string-array>
+
+    <string-array name="genderItems">
+        <item>Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+</resources>

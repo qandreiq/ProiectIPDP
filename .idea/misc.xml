@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.21770833333333334" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/ic_baseline_calculate_24.xml" value="0.22135416666666666" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/ic_food.xml" value="0.22135416666666666" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21770833333333334" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/ic_logout.xml" value="0.2604166666666667" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/ic_user.xml" value="0.2604166666666667" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/logo_apple_background.xml" value="0.2604166666666667" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/logo_banana_background.xml" value="0.2604166666666667" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/drawable/logo_morcoveata_background.xml" value="0.21770833333333334" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_check_pass_word.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_create_account.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_edit_user.xml" value="0.36666666666666664" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_goal_calculator.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_home_page.xml" value="0.25" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/content_main.xml" value="0.246875" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/drawer_header.xml" value="0.22" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/drawer_toolbar.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/fragment_diary.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/fragment_food.xml" value="0.2" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/fragment_user.xml" value="0.33" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/layout/nav_header.xml" value="0.23020833333333332" />
+        <entry key="..\:/Proiecte/Android/Calories Tracker/app/src/main/res/menu/drawer_menu.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
